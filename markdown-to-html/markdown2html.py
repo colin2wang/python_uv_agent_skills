@@ -27,12 +27,52 @@ class Theme:
 LIGHT_THEME = Theme(
     name="light",
     css="""
+/* 引入 PrismJS 语法高亮主题 (Tomorrow Night) */
+@import url('https://cdn.staticfile.org/prism/1.29.0/themes/prism-tomorrow.min.css');
+
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; max-width: 900px; margin: 2rem auto; padding: 0 1rem; line-height: 1.6; color: #24292e; background: #fff; }
 h1,h2,h3,h4,h5,h6 { margin-top: 1.5em; margin-bottom: 0.5em; border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; }
 h1 { font-size: 2em; } h2 { font-size: 1.5em; }
 code { background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; font-size: 85%; font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace; }
-pre { background: #f6f8fa; padding: 1em; border-radius: 6px; overflow-x: auto; border: 1px solid #eaecef; }
-pre code { background: none; padding: 0; border: none; }
+pre {
+    background: linear-gradient(145deg, #2d3748 0%, #1a202c 100%);
+    padding: 1.2em;
+    border-radius: 8px;
+    overflow-x: auto;
+    border: 1px solid #4a5568;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    position: relative;
+    margin: 1em 0;
+}
+pre code {
+    background: none;
+    padding: 0;
+    border: none;
+    display: block;
+    line-height: 1.5;
+    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+    font-size: 14px;
+    color: #e2e8f0;
+}
+pre::before {
+    content: attr(data-lang);
+    position: absolute;
+    top: 0.3em;
+    right: 0.5em;
+    font-size: 0.75em;
+    color: #a0aec0;
+    background: rgba(0,0,0,0.3);
+    padding: 0.2em 0.5em;
+    border-radius: 4px;
+    font-weight: 600;
+    z-index: 1;
+}
+/* 覆盖 PrismJS 默认样式 */
+pre[class*="language-"] {
+    background: linear-gradient(145deg, #2d3748 0%, #1a202c 100%) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+    border: 1px solid #4a5568 !important;
+}
 blockquote { border-left: 4px solid #dfe2e5; margin: 0; padding: 0.5em 1em; color: #6a737d; background: #fafbfc; }
 table { border-collapse: collapse; width: 100%; margin: 1.5em 0; display: block; overflow-x: auto; }
 th, td { border: 1px solid #dfe2e5; padding: 8px 12px; text-align: left; }
@@ -54,11 +94,51 @@ ul, ol { padding-left: 2em; }
 DARK_THEME = Theme(
     name="dark",
     css="""
+/* 引入 PrismJS 语法高亮主题 (Tomorrow Night) */
+@import url('https://cdn.staticfile.org/prism/1.29.0/themes/prism-tomorrow.min.css');
+
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; max-width: 900px; margin: 2rem auto; padding: 0 1rem; line-height: 1.6; color: #c9d1d9; background: #0d1117; }
 h1,h2,h3,h4,h5,h6 { margin-top: 1.5em; margin-bottom: 0.5em; border-bottom: 1px solid #21262d; padding-bottom: 0.3em; }
 code { background: #161b22; padding: 0.2em 0.4em; border-radius: 3px; font-size: 85%; font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace; }
-pre { background: #161b22; padding: 1em; border-radius: 6px; overflow-x: auto; border: 1px solid #30363d; }
-pre code { background: none; padding: 0; border: none; }
+pre {
+    background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+    padding: 1.2em;
+    border-radius: 8px;
+    overflow-x: auto;
+    border: 1px solid #334155;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    position: relative;
+    margin: 1em 0;
+}
+pre code {
+    background: none;
+    padding: 0;
+    border: none;
+    display: block;
+    line-height: 1.5;
+    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+    font-size: 14px;
+    color: #e2e8f0;
+}
+pre::before {
+    content: attr(data-lang);
+    position: absolute;
+    top: 0.3em;
+    right: 0.5em;
+    font-size: 0.75em;
+    color: #94a3b8;
+    background: rgba(255,255,255,0.1);
+    padding: 0.2em 0.5em;
+    border-radius: 4px;
+    font-weight: 600;
+    z-index: 1;
+}
+/* 覆盖 PrismJS 默认样式 */
+pre[class*="language-"] {
+    background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%) !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
+    border: 1px solid #334155 !important;
+}
 blockquote { border-left: 4px solid #30363d; margin: 0; padding: 0.5em 1em; color: #8b949e; background: #161b22; }
 table { border-collapse: collapse; width: 100%; margin: 1.5em 0; display: block; overflow-x: auto; }
 th, td { border: 1px solid #30363d; padding: 8px 12px; text-align: left; }
@@ -218,11 +298,30 @@ class MarkdownConverter:
     CODE_BLOCK_MARKER = re.compile(r'^```')
     TABLE_PIPE_INDICATOR = '|'
     
-    def __init__(self):
+    # Default language replacement rules
+    DEFAULT_LANGUAGE_REPLACEMENTS = {
+        'typescript': 'javascript',
+        'ts': 'javascript',
+        'tsx': 'javascript',
+        'md': 'markdown',
+        'yml': 'yaml',
+        'golang': 'go',
+        'shell': 'bash',
+        'sh': 'bash',
+        'zsh': 'bash',
+        'c#': 'csharp',
+        'cs': 'csharp',
+        'vue': 'html',
+        'react': 'jsx',
+    }
+    
+    def __init__(self, language_replacements: Optional[dict[str, str]] = None):
         self.inline_parser = InlineParser()
         self.table_parser = TableParser(self.inline_parser)
         self.block_state = BlockState()
         self.html_lines: list[str] = []
+        # Use provided replacements or default ones
+        self.language_replacements = language_replacements if language_replacements is not None else self.DEFAULT_LANGUAGE_REPLACEMENTS.copy()
     
     def _close_list(self):
         """Close the current list if open."""
@@ -250,9 +349,27 @@ class MarkdownConverter:
         self._close_list()
         self._close_table()
     
+    def _replace_language(self, lang: str) -> str:
+        """Replace language identifier based on replacement rules.
+        
+        Args:
+            lang: The original language identifier.
+            
+        Returns:
+            The replaced language identifier, or the original if no replacement rule applies.
+        """
+        if not lang:
+            return ''
+        
+        # Case-insensitive lookup
+        lang_lower = lang.lower()
+        return self.language_replacements.get(lang_lower, lang)
+    
     def _handle_code_block_start(self, line: str):
         """Handle the start/end of a code block."""
         lang = line.strip()[3:].strip()
+        # Apply language replacement
+        lang = self._replace_language(lang)
         self.block_state.code_lang = lang
         
         if self.block_state.in_code_block:
@@ -260,20 +377,26 @@ class MarkdownConverter:
             self.html_lines.append('</code></pre>')
             self.block_state.in_code_block = False
         else:
-            # Start code block
-            cls = f' class="language-{html_mod.escape(lang)}"' if lang else ''
-            self.html_lines.append(f'<pre><code{cls}>')
+            # Start code block - add language class for PrismJS
+            lang_class = f' class="language-{html_mod.escape(lang)}"' if lang else ''
+            lang_attr = f' data-lang="{html_mod.escape(lang)}"' if lang else ''
+            self.html_lines.append(f'<pre{lang_attr}><code{lang_class}>')
             self.block_state.in_code_block = True
     
     def _handle_table_line(self, line: str):
         """Process a line that contains a pipe character (potential table)."""
         state = self.table_parser.state
         
+        # Check if this looks like a table header (not starting with # or other block elements)
+        # If line starts with markdown heading (#), it's not a table
+        if line.startswith('#'):
+            return False
+        
         # Case A: Already inside a table -> Data Row
         if state.in_table:
             cells = self.table_parser.parse_row(line)
             self.html_lines.append(self.table_parser.row_to_html(cells))
-            return
+            return True
         
         # Case B: Have pending header, current line is separator -> Start Table
         if state.header_pending and self.table_parser.is_separator(line):
@@ -282,13 +405,16 @@ class MarkdownConverter:
             state.in_table = True
             self.html_lines.append(self.table_parser.start_table(state.header_pending))
             state.header_pending = []
-            return
+            return True
         
         # Case C: No pending header, looks like a header row -> Tentative Start
         if not state.header_pending and not self.table_parser.is_separator(line):
             self._close_paragraph()
             self._close_list()
             state.header_pending = self.table_parser.parse_row(line)
+            return True
+        
+        return False
     
     def _handle_false_table_start(self):
         """Handle case where a line looked like a table header but wasn't."""
@@ -301,18 +427,22 @@ class MarkdownConverter:
             self.html_lines.append(f'<p>{reconstructed}</p>')
             state.header_pending = []
     
-    def _handle_heading(self, line: str):
-        """Process a heading line."""
+    def _handle_heading(self, line: str) -> bool:
+        """Process a heading line. Returns True if handled."""
         match = self.HEADING_PATTERN.match(line)
         if match:
             level = len(match.group(1))
             content = self.inline_parser.parse(match.group(2))
             self.html_lines.append(f'<h{level}>{content}</h{level}>')
+            return True
+        return False
     
-    def _handle_horizontal_rule(self, line: str):
-        """Process a horizontal rule."""
+    def _handle_horizontal_rule(self, line: str) -> bool:
+        """Process a horizontal rule. Returns True if handled."""
         if self.HR_PATTERN.match(line):
             self.html_lines.append('<hr>')
+            return True
+        return False
     
     def _handle_blockquote(self, line: str):
         """Process a blockquote."""
@@ -382,10 +512,10 @@ class MarkdownConverter:
                 self._close_all_blocks()
                 continue
             
-            # 3. Table Logic
-            if self.TABLE_PIPE_INDICATOR in stripped:
-                self._handle_table_line(stripped)
-                continue
+            # 3. Table Logic (but not if it's a heading or other block element)
+            if self.TABLE_PIPE_INDICATOR in stripped and not stripped.startswith('#'):
+                if self._handle_table_line(stripped):
+                    continue
             
             # 4. Handle "False Start" for tables
             self._handle_false_table_start()
@@ -429,7 +559,7 @@ class MarkdownConverter:
         return '\n'.join(self.html_lines)
 
 
-def md_to_html(md_text: str) -> str:
+def md_to_html(md_text: str, language_replacements: Optional[dict[str, str]] = None) -> str:
     """Convert Markdown to HTML.
     
     This is a convenience function that creates a MarkdownConverter
@@ -437,11 +567,13 @@ def md_to_html(md_text: str) -> str:
     
     Args:
         md_text: The Markdown text to convert.
-        
+        language_replacements: Optional dictionary mapping language identifiers
+                              to their replacements (e.g., {'typescript': 'javascript'}).
+                              
     Returns:
         The converted HTML string (body content only, no HTML wrapper).
     """
-    converter = MarkdownConverter()
+    converter = MarkdownConverter(language_replacements=language_replacements)
     return converter.convert(md_text)
 
 
@@ -469,6 +601,16 @@ def generate_html_document(body_content: str, title: str, theme: Theme) -> str:
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{escaped_title}</title>
 <style>{theme.css}</style>
+<!-- 引入 PrismJS 进行语法高亮 (使用国内 CDN) -->
+<link rel="stylesheet" href="https://cdn.staticfile.org/prism/1.29.0/themes/prism-tomorrow.min.css">
+<script src="https://cdn.staticfile.org/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdn.staticfile.org/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdn.staticfile.org/prism/1.29.0/components/prism-javascript.min.js"></script>
+<script src="https://cdn.staticfile.org/prism/1.29.0/components/prism-css.min.js"></script>
+<script src="https://cdn.staticfile.org/prism/1.29.0/components/prism-bash.min.js"></script>
+<script src="https://cdn.staticfile.org/prism/1.29.0/components/prism-json.min.js"></script>
+<script src="https://cdn.staticfile.org/prism/1.29.0/components/prism-java.min.js"></script>
+<script src="https://cdn.staticfile.org/prism/1.29.0/components/prism-sql.min.js"></script>
 </head>
 <body>
 {body_content}
