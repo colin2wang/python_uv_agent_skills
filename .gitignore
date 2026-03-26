@@ -1,0 +1,17 @@
+# Jet Brains IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+*.iws.old
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.py[cod]
+
+# Test Data
+**/test-data/*
