@@ -14,11 +14,11 @@ A zero-dependency Python tool that converts Markdown files into beautiful, self-
 
 ## Features
 
-- **Full Markdown support**: Headings, bold, italic, strikethrough, links, images, code blocks with syntax hints, blockquotes, ordered and unordered lists, horizontal rules, and tables
+- **Full Markdown support**: Headings, bold, italic, strikethrough, links, images, code blocks with syntax hints, blockquotes, ordered and unordered lists, horizontal rules, and **tables**
 - **Two built-in themes**: Light (GitHub-inspired) and Dark mode with carefully chosen colors
 - **Self-contained output**: All CSS is embedded inline — the resulting HTML file works anywhere with no external dependencies
 - **Responsive design**: Output looks great on desktop and mobile screens
-- **Stdin support**: Pipe content directly for use in shell pipelines
+- **Stdin/Stdout support**: Pipe content for use in shell pipelines or redirect to files
 
 ## Usage Examples
 
@@ -32,14 +32,14 @@ Use the dark theme for a presentation:
 python markdown2html.py notes.md -o notes.html --theme dark --title "Meeting Notes"
 ```
 
-Pipe from another command:
+Pipe from another command using stdin:
 ```bash
 cat CHANGELOG.md | python markdown2html.py - -o changelog.html
 ```
 
-Use in a newsletter pipeline:
+Output to stdout (for piping):
 ```bash
-python markdown2html.py issue-42.md --title "Lobster Diary #42" -o issue.html
+python markdown2html.py issue-42.md --title "Lobster Diary #42" > issue.html
 ```
 
 ## Supported Markdown Elements
@@ -58,6 +58,7 @@ python markdown2html.py issue-42.md --title "Lobster Diary #42" -o issue.html
 | Unordered lists | `- item` or `* item` | ✅ |
 | Ordered lists | `1. item` | ✅ |
 | Horizontal rules | `---` | ✅ |
+| Tables | `\| col \|` with separator row | ✅ |
 
 ## Command Line Options
 
