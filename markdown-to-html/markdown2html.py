@@ -36,9 +36,14 @@ h1 { font-size: 2em; } h2 { font-size: 1.5em; }
 code { background: #f6f8fa; padding: 0.2em 0.4em; border-radius: 3px; font-size: 85%; font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace; }
 pre {
     background: linear-gradient(145deg, #2d3748 0%, #1a202c 100%);
-    padding: 1.2em;
+    padding: 1em;
     border-radius: 8px;
-    overflow-x: auto;
+    overflow: hidden;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-all;
+    width: 100%;
+    box-sizing: border-box;
     border: 1px solid #4a5568;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     position: relative;
@@ -51,8 +56,13 @@ pre code {
     display: block;
     line-height: 1.5;
     font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
-    font-size: 14px;
+    font-size: 13px;
     color: #e2e8f0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-all;
+    max-width: 100%;
+    overflow-wrap: break-word;
 }
 pre::before {
     content: attr(data-lang);
@@ -102,9 +112,14 @@ h1,h2,h3,h4,h5,h6 { margin-top: 1.5em; margin-bottom: 0.5em; border-bottom: 1px 
 code { background: #161b22; padding: 0.2em 0.4em; border-radius: 3px; font-size: 85%; font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace; }
 pre {
     background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
-    padding: 1.2em;
+    padding: 1em;
     border-radius: 8px;
-    overflow-x: auto;
+    overflow: hidden;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-all;
+    width: 100%;
+    box-sizing: border-box;
     border: 1px solid #334155;
     box-shadow: 0 4px 12px rgba(0,0,0,0.5);
     position: relative;
@@ -117,8 +132,13 @@ pre code {
     display: block;
     line-height: 1.5;
     font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
-    font-size: 14px;
+    font-size: 13px;
     color: #e2e8f0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-all;
+    max-width: 100%;
+    overflow-wrap: break-word;
 }
 pre::before {
     content: attr(data-lang);
@@ -707,7 +727,8 @@ def main():
     
     # Get theme
     theme = THEMES.get(args.theme, LIGHT_THEME)
-    
+
+
     # Convert markdown to HTML
     body_html = md_to_html(md_text)
     
