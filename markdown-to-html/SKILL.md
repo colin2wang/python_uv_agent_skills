@@ -6,6 +6,7 @@ triggers:
   - markdown to html
   - render markdown
   - style markdown
+metadata: { "copaw": { "emoji": "✨" } }
 ---
 
 # Markdown to HTML Converter

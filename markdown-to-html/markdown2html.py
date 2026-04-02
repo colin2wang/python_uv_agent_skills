@@ -27,7 +27,7 @@ class Theme:
 LIGHT_THEME = Theme(
     name="light",
     css="""
-/* 引入 PrismJS 语法高亮主题 (Tomorrow Night) */
+/* Import PrismJS syntax highlighting theme (Tomorrow Night) */
 @import url('https://cdn.staticfile.org/prism/1.29.0/themes/prism-tomorrow.min.css');
 
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; max-width: 900px; margin: 2rem auto; padding: 0 1rem; line-height: 1.6; color: #24292e; background: #fff; }
@@ -77,7 +77,7 @@ pre::before {
     font-weight: 600;
     z-index: 1;
 }
-/* 覆盖 PrismJS 默认样式 */
+/* Override PrismJS default styles */
 pre[class*="language-"] {
     background: linear-gradient(145deg, #2d3748 0%, #1a202c 100%) !important;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
@@ -104,7 +104,7 @@ ul, ol { padding-left: 2em; }
 DARK_THEME = Theme(
     name="dark",
     css="""
-/* 引入 PrismJS 语法高亮主题 (Tomorrow Night) */
+/* Import PrismJS syntax highlighting theme (Tomorrow Night) */
 @import url('https://cdn.staticfile.org/prism/1.29.0/themes/prism-tomorrow.min.css');
 
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; max-width: 900px; margin: 2rem auto; padding: 0 1rem; line-height: 1.6; color: #c9d1d9; background: #0d1117; }
@@ -153,7 +153,7 @@ pre::before {
     font-weight: 600;
     z-index: 1;
 }
-/* 覆盖 PrismJS 默认样式 */
+/* Override PrismJS default styles */
 pre[class*="language-"] {
     background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%) !important;
     box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
@@ -621,7 +621,7 @@ def generate_html_document(body_content: str, title: str, theme: Theme) -> str:
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{escaped_title}</title>
 <style>{theme.css}</style>
-<!-- 引入 PrismJS 进行语法高亮 (使用国内 CDN) -->
+<!-- Import PrismJS for syntax highlighting (using Chinese CDN) -->
 <link rel="stylesheet" href="https://cdn.staticfile.org/prism/1.29.0/themes/prism-tomorrow.min.css">
 <script src="https://cdn.staticfile.org/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdn.staticfile.org/prism/1.29.0/components/prism-python.min.js"></script>
@@ -650,7 +650,7 @@ def read_markdown_file(input_path: str) -> str:
     Returns:
         The markdown content as a string.
         
-    Raises:
+    Raises:2
         FileNotFoundError: If the input file doesn't exist.
     """
     if input_path == '-':
