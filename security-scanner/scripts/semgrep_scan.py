@@ -217,14 +217,12 @@ class SemgrepScanner:
         env['PYTHONUTF8'] = '1'
         return env
     
-    def _handle_error(self, message: str, **kwargs) -> ScanResult:
+    def _handle_error(self, message: str, details: str = None) -> ScanResult:
         """Create error result"""
         return ScanResult(
             error=True,
             message=message,
-            details=kwargs.get('details'),
-            returncode=kwargs.get('returncode'),
-            command=kwargs.get('command')
+            details=details
         )
     
     def scan(self) -> ScanResult:
@@ -277,11 +275,8 @@ class SemgrepScanner:
                 
                 return ScanResult(
                     error=True,
-                    message="Semgrep scan failed.",
-                    details=result.stderr,
-                    returncode=result.returncode,
-                    stdout=result.stdout,
-                    command=' '.join(cmd)
+                    message=f"Semgrep scan failed with return code {result.returncode}",
+                    details=result.stderr
                 )
             
             # Parse results
@@ -475,21 +470,12 @@ def output_json(result: ScanResult):
     
     try:
         if sys.platform == 'win32':
-            # Use buffer write to avoid encoding issues on Windows
             sys.stdout.buffer.write((json_output + '\n').encode('utf-8'))
             sys.stdout.flush()
         else:
             print(json_output)
-    except (ValueError, AttributeError, OSError) as e:
-        # Fallback for stdout issues
-        try:
-            old_stdout = sys.stdout
-            sys.stdout = io.StringIO()
-            sys.stdout = old_stdout
-            sys.stdout.write(json_output + '\n')
-        except Exception:
-            sys.stdout = old_stdout
-            sys.stderr.write(json_output + '\n')
+    except (ValueError, AttributeError, OSError):
+        sys.stderr.write(json_output + '\n')
 
 
 def main():

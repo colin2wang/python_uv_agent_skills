@@ -1,11 +1,13 @@
 ---
 name: markdown-to-html
-description: Convert Markdown text to beautifully styled, self-contained HTML with embedded CSS. Perfect for newsletters, documentation, reports, and email templates.
+description: Convert Markdown files to beautifully styled, self-contained HTML with embedded CSS. Perfect for newsletters, documentation, reports, and email templates.
 triggers:
   - convert markdown to html
   - markdown to html
   - render markdown
   - style markdown
+dependency:
+  python: []
 metadata: { "copaw": { "emoji": "✨" } }
 ---
 
@@ -16,31 +18,31 @@ A zero-dependency Python tool that converts Markdown files into beautiful, self-
 ## Features
 
 - **Full Markdown support**: Headings, bold, italic, strikethrough, links, images, code blocks with syntax hints, blockquotes, ordered and unordered lists, horizontal rules, and **tables**
-- **Two built-in themes**: Light (GitHub-inspired) and Dark mode with carefully chosen colors
-- **Self-contained output**: All CSS is embedded inline — the resulting HTML file works anywhere with no external dependencies
-- **Responsive design**: Output looks great on desktop and mobile screens
-- **Stdin/Stdout support**: Pipe content for use in shell pipelines or redirect to files
+- **Two built-in themes**: Light (GitHub-inspired) and Dark mode
+- **Self-contained output**: All CSS is embedded inline — works anywhere with no external dependencies
+- **Responsive design**: Looks great on desktop and mobile
+- **Stdin/Stdout support**: Pipe content in shell pipelines
 
-## Usage Examples
+## Usage
 
 Convert a file with the default light theme:
 ```bash
-python markdown2html.py README.md -o readme.html
+uv run python markdown-to-html/markdown2html.py README.md -o readme.html
 ```
 
 Use the dark theme for a presentation:
 ```bash
-python markdown2html.py notes.md -o notes.html --theme dark --title "Meeting Notes"
+uv run python markdown-to-html/markdown2html.py notes.md -o notes.html --theme dark --title "Meeting Notes"
 ```
 
 Pipe from another command using stdin:
 ```bash
-cat CHANGELOG.md | python markdown2html.py - -o changelog.html
+cat CHANGELOG.md | uv run python markdown-to-html/markdown2html.py - -o changelog.html
 ```
 
 Output to stdout (for piping):
 ```bash
-python markdown2html.py issue-42.md --title "Lobster Diary #42" > issue.html
+uv run python markdown-to-html/markdown2html.py issue-42.md --title "Lobster Diary #42" > issue.html
 ```
 
 ## Supported Markdown Elements
@@ -61,7 +63,7 @@ python markdown2html.py issue-42.md --title "Lobster Diary #42" > issue.html
 | Horizontal rules | `---` | ✅ |
 | Tables | `\| col \|` with separator row | ✅ |
 
-## Command Line Options
+## CLI Options
 
 - `input` — Markdown file path, or `-` for stdin
 - `-o, --output` — Output HTML file (defaults to stdout)
